@@ -34,6 +34,9 @@ app.use('/', mods.Portafolio.PortafolioRoutes);
 //     res.status(200).json({message: "Hi!"});
 // });
 
+app.get("/", (req,res) => {
+    res.json({message: "hola"});
+});
 
 
 
