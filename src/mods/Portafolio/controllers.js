@@ -20,10 +20,16 @@ MongoClient.connect('mongodb+srv://christianw:ducrusfis5@cluster0.qqdwsf0.mongod
 const getUsersC = async (req,res)=>{
     console.log("mensaje antes del colapso");
 
-    const response = await collection.find().toArray();
+    let response;
+    try {
+        response = await collection.find().toArray();
+    } catch (error) {
+        console.log(error);
+        res.status(200).json(error);
+    }
+    
     console.log(response);
     res.status(200).json(response);
-
 }
 
 const getUserByIdC = async (req,res) => {
