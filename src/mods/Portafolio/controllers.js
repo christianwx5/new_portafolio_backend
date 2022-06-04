@@ -25,7 +25,7 @@ const getUsersC = async (req,res)=>{
         response = await collection.find().toArray();
     } catch (error) {
         console.log(error);
-        res.status(500).json(error);
+        res.status(500).json({message: error});
     }
     
     console.log(response);
