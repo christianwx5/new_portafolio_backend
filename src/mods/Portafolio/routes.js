@@ -1,9 +1,9 @@
 //Imports
 //----------------------------------------------------------------------------
-const { getUsersC, updateUserPassC, createUserC, deleteUserC } = require('./controllers');
+const { getUsersC, getUserByIdC, createUserC, deleteUserC } = require('./controllers');
 const { Router } = require('express');
 
-
+//https://new-portafolio-backend.herokuapp.com/portafolio
 const rootRoutes = '/portafolio';
 const routes = Router();
 //Routes
@@ -13,7 +13,7 @@ const routes = Router();
 routes.get('/', getUsersC);
 
 //consulta a un solo proyecto del pertafolio
-routes.get('/:id', getUsersC);
+routes.get('/:id', getUserByIdC);
 
 // Create a new proyecto del pertafolio
 routes.post('/', createUserC);

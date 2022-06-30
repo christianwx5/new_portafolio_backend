@@ -35,12 +35,12 @@ const getUsersC = async (req,res)=>{
 const getUserByIdC = async (req,res) => {
     const id = req.params.id;
     try {
-        const response = await collection.find().toArray();
+        const response = await collection.findOne({ number_project: 3 });
+        
+        return res.status(200).json(response);
     } catch (e) {
-        return res.status(401).send();
+        return res.status(401).json(e);
     }
-
-    res.status(200).json(response.rows);
 }
 
 const createUserC = async (req,res)=>{
@@ -49,8 +49,12 @@ const createUserC = async (req,res)=>{
     const fields = "username, email, password, full_name, company, zip_code, country, city, phone_1, role, wallet_balance, status";
 
     try {
+        console.log(req.body);    
+        const response = req.body.map( async r => {
+            return await collection.insertOne(r);
+        });
 
-        const response = await collection.insertOne(req.body);
+        // const response = await collection.insertOne(req.body);
         console.log(response);
         res.json('Success');
         
@@ -61,12 +65,13 @@ const createUserC = async (req,res)=>{
         
     } catch (error) {
 
+            console.log(error);
+
             return res.status(500).json({
-            message: 'An error occurred on the server: ',
-            error
+                message: 'An error occurred on the server: ',
+                error
             });
     }
-    
 }
 
 const updateUserC = async (req,res)=>{
