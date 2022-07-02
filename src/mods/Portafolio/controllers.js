@@ -4,6 +4,7 @@ const MongoClient = require('mongodb').MongoClient
 
 let db;
 let collection;
+
 MongoClient.connect('mongodb+srv://christianw:ducrusfis5@cluster0.qqdwsf0.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
     if (err) return console.error(err)
     console.log('Connected to Database')
@@ -33,9 +34,9 @@ const getUsersC = async (req,res)=>{
 }
 
 const getUserByIdC = async (req,res) => {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     try {
-        const response = await collection.findOne({ number_project: 3 });
+        const response = await collection.findOne({ number_project: id });
         
         return res.status(200).json(response);
     } catch (e) {
